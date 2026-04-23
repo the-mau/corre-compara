@@ -1,0 +1,2 @@
+"""APIRouter inicializador (namespace)."""
+

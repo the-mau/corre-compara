@@ -1,0 +1,17 @@
+fastapi
+uvicorn[standard]
+sqlalchemy
+asyncpg
+pydantic
+pydantic-settings
+playwright
+celery
+redis
+httpx
+beautifulsoup4
+python-dotenv
+supabase
+python-jose[cryptography]
+passlib[bcrypt]
+alembic
+
