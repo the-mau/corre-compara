@@ -7,6 +7,32 @@ import type { Product } from "@/lib/types";
 import { getProducts } from "@/lib/api";
 
 const popularBrands = ["Nike", "Adidas", "ASICS", "New Balance"];
+const mockProducts: Product[] = [
+  {
+    id: "mock-nike-pegasus-41",
+    name: "Nike Pegasus 41",
+    brand: "Nike",
+    category: "road",
+    image_url: null,
+    model_code: "nike-pegasus-41",
+  },
+  {
+    id: "mock-adidas-supernova-rise",
+    name: "Adidas Supernova Rise",
+    brand: "Adidas",
+    category: "road",
+    image_url: null,
+    model_code: "adidas-supernova-rise",
+  },
+  {
+    id: "mock-asics-gel-nimbus-26",
+    name: "ASICS Gel-Nimbus 26",
+    brand: "ASICS",
+    category: "road",
+    image_url: null,
+    model_code: "asics-gel-nimbus-26",
+  },
+];
 
 export default function HomePage() {
   const [products, setProducts] = useState<Product[]>([]);
@@ -22,7 +48,11 @@ export default function HomePage() {
         const res = await getProducts();
         if (!cancelled) setProducts(res);
       } catch (e) {
-        if (!cancelled) setError(e instanceof Error ? e.message : "Error al cargar productos");
+        if (!cancelled) {
+          // Fallback temporal para deploy (ej. Vercel) cuando API aún no está disponible.
+          setProducts(mockProducts);
+          setError("Usando datos de ejemplo temporalmente.");
+        }
       } finally {
         if (!cancelled) setLoading(false);
       }
