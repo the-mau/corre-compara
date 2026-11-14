@@ -122,7 +122,7 @@ async def get_product_history(
             MIN(price) AS best_price
           FROM price_history
           WHERE product_id = :id
-            AND scraped_at >= now() - (:days || ' days')::interval
+            AND scraped_at >= now() - make_interval(days => :days)
           GROUP BY day, product_id
         )
         SELECT
